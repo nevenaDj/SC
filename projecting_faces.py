@@ -1,7 +1,7 @@
 import sys
 import dlib
-import cv2
-import openface
+#import cv2
+#import openface
 
 
 def projecting_faces(file_name):

@@ -1,7 +1,5 @@
-import sys
 import dlib
 from skimage import io
-import cv2
 
 
 def face_detection(file_name):

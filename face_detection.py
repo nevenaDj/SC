@@ -35,6 +35,7 @@ def face_detection(file_name):
 
         crop_img = image[face_rect.top():face_rect.bottom(), face_rect.left():face_rect.right()]
         win.set_image(crop_img)
+
         # Draw a box around each face we found
         #win.add_overlay(face_rect)
 

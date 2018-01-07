@@ -2,7 +2,7 @@ import sys
 import dlib
 from skimage import io
 
-def finding_face_landmark(v):
+def finding_face_landmark(image):
     # You can download the required pre-trained face detection model here:
     # http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
     predictor_model = "shape_predictor_68_face_landmarks.dat"
@@ -15,15 +15,15 @@ def finding_face_landmark(v):
     win = dlib.image_window()
 
     # Take the image file name from the command line
-    file_name = sys.argv[1]
+    #file_name = sys.argv[1]
 
     # Load the image
-    image = io.imread(file_name)
+    #image = io.imread(file_name)
 
     # Run the HOG face detector on the image data
     detected_faces = face_detector(image, 1)
 
-    print("Found {} faces in the image file {}".format(len(detected_faces), file_name))
+    print("Found {} faces in the image file {}".format(len(detected_faces), image))
 
     # Show the desktop window with the image
     win.set_image(image)

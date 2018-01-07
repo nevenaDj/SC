@@ -19,9 +19,12 @@ def face_detection(file_name):
     detected_faces = face_detector(image, 1)
 
     print("I found {} faces in the file {}".format(len(detected_faces), file_name))
+    if (len(detected_faces)!=1):
+        print("On the photo, there are more faces. Please try out with diffrent photo. ")
+        exit(0)
 
     # Open a window on the desktop showing the image
-    win.set_image(image)
+    #win.set_image(image)
 
     # Loop through each face we found in the image
     for i, face_rect in enumerate(detected_faces):
@@ -30,8 +33,12 @@ def face_detection(file_name):
         print("- Face #{} found at Left: {} Top: {} Right: {} Bottom: {}".format(i, face_rect.left(), face_rect.top(),
                                                                                  face_rect.right(), face_rect.bottom()))
 
+        crop_img = image[face_rect.top():face_rect.bottom(), face_rect.left():face_rect.right()]
+        win.set_image(crop_img)
         # Draw a box around each face we found
-        win.add_overlay(face_rect)
+        #win.add_overlay(face_rect)
 
     # Wait until the user hits <enter> to close the window
     dlib.hit_enter_to_continue()
+    return crop_img
+

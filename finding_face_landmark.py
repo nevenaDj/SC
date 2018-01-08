@@ -2,6 +2,8 @@ import sys
 import dlib
 from skimage import io
 import openface
+import cv2
+
 
 def finding_face_landmark(file_name):
     # You can download the required pre-trained face detection model here:
@@ -25,7 +27,7 @@ def finding_face_landmark(file_name):
 
     print("Found {} faces in the image file {}".format(len(detected_faces), image))
     if (len(detected_faces) != 1):
-        print("On the photo, there are more faces. Please try out with diffrent photo. ")
+        print("On the photo, there are more faces. Please try out with different photo. ")
         exit(0)
 
     # Show the desktop window with the image

@@ -65,6 +65,15 @@ class Neural_Network():
         plt.plot(costs)
         plt.show()
 
+
+    def test(self, data, label):
+        with tf.Session() as sess:
+            self.saver.restore(sess, self.file_name)
+            print("Accuracy", sess.run(self.accuracy, feed_dict={self.x: self.data, self.y: self.label}))
+            print("Accuracy", sess.run(self.accuracy, feed_dict={self.x: data, self.y: label}))
+
+
+
     def predict(self, prediction):
         with tf.Session() as sess:
             self.saver.restore(sess, self.file_name)

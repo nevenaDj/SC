@@ -25,19 +25,25 @@ def generate_file_with_features(input_dir, output_file):
             fd.close()
 
 
-def get_data(file_name):
+def get_data(file_name, n):
     fd = pd.read_csv(file_name, header=None)
     data = fd.as_matrix()
 
-    X = data[:2000, :15].astype(np.float32)       # get features
-    Q = data[:, 15:]                              # get labelse
-    Y = np.identity(len(X))                       # create identy matrix
+    X = data[:n, :15].astype(np.float32)           # get features
+    Q = data[:n, 15:]                               # get labelse
+    Y = np.identity(len(X))                        # create identy matrix
 
+    return  X,Y,Q
+
+
+def get_min_max(X):
     x_max = X.max()
     x_min = X.min()
+    return  x_min, x_max
 
-    X = (X - x_min) / (x_max - x_min)       # convert to [0,1]
-    return X, Y, Q, x_min, x_max
+
+def normalize_features(x_min, x_max, features):
+    return (features - x_min) / (x_max - x_min)      # convert to [0,1]
 
 
 def get_percent(input, predict):
@@ -63,7 +69,7 @@ def get_name(path, metadata_path):
     name = mat['wiki']['name'].tolist()
     full_path = mat['wiki']['full_path'].tolist()
     print(path)
-    index = full_path.tolist().index(path)
+    index = full_path.tolist().index(path.strip())
     print(index)
     print(name[index])
     return name[index]
@@ -81,5 +87,17 @@ def show_image(image_path, name, percent):
     cv2.destroyAllWindows()
 
 
-def normalize_features(x_min, x_max, features):
-    return (features - x_min) / (x_max - x_min)
+def get_data_test(test_file_name, x_min, x_max, n, Q, Y):
+    T, P, L = get_data(test_file_name, 100)
+    T = normalize_features(x_min, x_max, T)
+    P = np.identity(n)
+
+    for i in range(0, len(L)):
+        item_index = np.where(Q == L[i])
+        print(item_index)
+        index = list(item_index)[0][0]
+        print(index)
+        P[i] = Y[index]
+
+    P = P[:T.shape[0], :len(Y)]
+    return T,P,L

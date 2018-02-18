@@ -8,7 +8,6 @@ def main():
     image = input("")
 
     features = finding_face_landmark.finding_face_landmark(image)
-    print(features)
     if (len(features) == 0):
         exit(0)
 

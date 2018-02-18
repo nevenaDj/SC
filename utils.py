@@ -70,7 +70,6 @@ def get_name(path, metadata_path):
     full_path = mat['wiki']['full_path'].tolist()
     print(path)
     index = full_path.tolist().index(path.strip())
-    print(index)
     print(name[index])
     return name[index]
 
@@ -94,9 +93,7 @@ def get_data_test(test_file_name, x_min, x_max, n, Q, Y):
 
     for i in range(0, len(L)):
         item_index = np.where(Q == L[i])
-        print(item_index)
         index = list(item_index)[0][0]
-        print(index)
         P[i] = Y[index]
 
     P = P[:T.shape[0], :len(Y)]

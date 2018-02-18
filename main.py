@@ -1,5 +1,4 @@
-import face_detection, finding_face_landmark, projecting_faces
-import numpy as np
+import finding_face_landmark
 import utils as utils
 import neural_network as n
 
@@ -42,10 +41,6 @@ def main():
     #  file_name = 'features2.csv'
     #  fd = open(file_name, 'w')
     #  utils.generate_file_with_features(images_path, file_name)
-
-    #crop_img=face_detection.face_detection(file_name)      - integrated in landmark
-    #finding_face_landmark.finding_face_landmark(file_name) # with face_detection and projecting faces
-    #projecting_faces.projecting_faces(file_name)
 
 
 main()
